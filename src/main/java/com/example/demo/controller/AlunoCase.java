@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.AlunoRequestDto;
 import com.example.demo.dto.AlunoResponseDto;
 import com.example.demo.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class AlunoCase {
         return alunoService.getAllAlunos();
     }
 
-    @PostMapping
-    public ResponseEntity<AlunoResponseDto> criar(@RequestBody AlunoRequestDto dto) {
+    @PostMapping("/cadastrar")
+    public ResponseEntity<AlunoResponseDto> criar(@Valid @RequestBody AlunoRequestDto dto) {
         AlunoResponseDto response = alunoService.criarAluno(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
